@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elk-nginx
+  namespace: mypatv4-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elk-nginx
+  template:
+    metadata:
+      labels:
+        app: elk-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: 156726015309.dkr.ecr.us-west-2.amazonaws.com/elk-nginx:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: elk-nginx
+  namespace: mypatv4-prod
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: elk-nginx
