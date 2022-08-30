@@ -205,7 +205,7 @@ spec:
     app: elk-nginx
 ```
 
-Access Kibana with Auth
+## Access Kibana with Auth
 
 ![](images/kibanaAuth.png)
 
